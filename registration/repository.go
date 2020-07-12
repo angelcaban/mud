@@ -93,7 +93,7 @@ func (repo *repository) FindAll() []*model.Registration {
 		for i, item := range items {
 			slice_[i] = item.Interface().(*model.Registration)
 		}
-		append(allRegs, slice_)
+		allRegs = append(allRegs, slice_...)
 		offset += uint64(len(items))
 	}
 

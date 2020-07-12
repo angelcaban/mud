@@ -3,6 +3,7 @@ package registration
 import (
 	"context"
 
+	"github.com/angelcaban/mud/model"
 	"github.com/go-kit/kit/endpoint"
 	"github.com/gofrs/uuid"
 )
@@ -112,7 +113,7 @@ func makeUpdateRegistrationEndpoint(s Service) endpoint.Endpoint {
 
 		return EditRegistrationResponse{
 			Id:       reg.Id,
-			Username: reg.Username,
+			Username: reg.Name,
 			Email:    reg.Email,
 			TimeZone: reg.TimeZone,
 			ShortBio: reg.ShortBio,

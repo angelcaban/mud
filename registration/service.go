@@ -1,7 +1,6 @@
 package registration
 
 import (
-	"database/sql"
 	"errors"
 	"fmt"
 
@@ -34,10 +33,10 @@ type service struct {
 	regRepository RegistrationRepository
 }
 
-func NewService(repo RegistrationRepository) (Service, error) {
+func NewService(repo RegistrationRepository) Service {
 	return &service{
 		regRepository: repo,
-	}, nil
+	}
 }
 
 func (s *service) NewRegistration(username string, password []byte, email string,
@@ -50,8 +49,12 @@ func (s *service) NewRegistration(username string, password []byte, email string
 		timezone = "UTC"
 	}
 
+	newId, err := uuid.NewV4()
+	if err != nil {
+		return nil, err
+	}
 	newReg := &model.Registration{
-		Id:        uuid.NewV4(),
+		Id:        newId,
 		Name:      username,
 		Email:     email,
 		Password:  password,
